@@ -28,9 +28,3 @@ jobs:
       run: |
         docker push backendacr.azurecr.io/backend:${{ github.sha }}
 
-    - name: Deploy ACA
-      run: |
-        az containerapp update \
-          --name backendapi \
-          --resource-group rg-tfstate \
-          --image backendacr.azurecr.io/backend:${{ github.sha }}
