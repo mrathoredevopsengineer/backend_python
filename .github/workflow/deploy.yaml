@@ -1,0 +1,36 @@
+name: Deploy Backend
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Azure Login
+      uses: azure/login@v2
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: ACR Login
+      run: az acr login --name backendacr
+
+    - name: Build Image
+      run: |
+        docker build -t backendacr.azurecr.io/backend:${{ github.sha }} .
+
+    - name: Push Image
+      run: |
+        docker push backendacr.azurecr.io/backend:${{ github.sha }}
+
+    - name: Deploy ACA
+      run: |
+        az containerapp update \
+          --name backendapi \
+          --resource-group rg-tfstate \
+          --image backendacr.azurecr.io/backend:${{ github.sha }}
