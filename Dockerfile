@@ -14,7 +14,7 @@ unixodbc-dev
 
 RUN curl -sSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /usr/share/keyrings/microsoft-prod.gpg
 
-# Add Microsoft SQL Server repository
+# Add Microsoft SQL repository
 
 RUN curl -sSL https://packages.microsoft.com/config/debian/12/prod.list 
 > /etc/apt/sources.list.d/mssql-release.list
@@ -24,7 +24,7 @@ RUN curl -sSL https://packages.microsoft.com/config/debian/12/prod.list
 RUN sed -i 's#deb #deb [signed-by=/usr/share/keyrings/microsoft-prod.gpg] #g' 
 /etc/apt/sources.list.d/mssql-release.list
 
-# Install ODBC Driver 18
+# Install ODBC Driver
 
 RUN apt-get update && ACCEPT_EULA=Y apt-get install -y msodbcsql18
 
@@ -32,7 +32,7 @@ RUN apt-get update && ACCEPT_EULA=Y apt-get install -y msodbcsql18
 
 COPY requirements.txt .
 
-# Install Python dependencies
+# Install Python packages
 
 RUN pip install --no-cache-dir -r requirements.txt
 
@@ -40,10 +40,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-# Expose FastAPI port
+# Expose port
 
 EXPOSE 8000
 
-# Start application
+# Start app
 
 CMD ["python", "app.py"]
