@@ -20,8 +20,7 @@ RUN curl -sSL https://packages.microsoft.com/config/debian/12/prod.list > /etc/a
 
 # Configure signed repository
 
-RUN sed -i 's#deb #deb [signed-by=/usr/share/keyrings/microsoft-prod.gpg] #g' 
-/etc/apt/sources.list.d/mssql-release.list
+RUN sed -i 's#deb #deb [signed-by=/usr/share/keyrings/microsoft-prod.gpg] #g' /etc/apt/sources.list.d/mssql-release.list
 
 # Install ODBC Driver
 
