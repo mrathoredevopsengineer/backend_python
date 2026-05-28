@@ -10,7 +10,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # connection_string = os.getenv("CONNECTION_STRING")
-connection_string = os.getenv("CONNECTION_STRING")
+conn_str = os.getenv("DB_CONN")
+print("Using connection string:", conn_str)
 
 app = FastAPI()
 
