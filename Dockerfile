@@ -16,8 +16,7 @@ RUN curl -sSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor 
 
 # Add Microsoft SQL repository
 
-RUN curl -sSL https://packages.microsoft.com/config/debian/12/prod.list 
-> /etc/apt/sources.list.d/mssql-release.list
+RUN curl -sSL https://packages.microsoft.com/config/debian/12/prod.list > /etc/apt/sources.list.d/mssql-release.list
 
 # Configure signed repository
 
