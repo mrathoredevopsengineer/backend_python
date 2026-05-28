@@ -4,11 +4,11 @@ WORKDIR /app
 
 # Install required packages
 
-RUN apt-get update && apt-get install -y 
-curl 
-gnupg 
-unixodbc 
-unixodbc-dev
+RUN apt-get update && apt-get install -y \
+curl \
+gnupg \
+unixodbc \ 
+unixodbc-dev 
 
 # Add Microsoft signing key
 
